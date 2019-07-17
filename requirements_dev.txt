@@ -1,0 +1,6 @@
+-r requirements.txt
+
+# Developer tools
+flake8
+ipdb
+ipython~=7.2.0

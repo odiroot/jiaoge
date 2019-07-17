@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  web:
+    restart: always
+    environment:
+      - DJANGO_SECRET_KEY=foobar
+    image: jiaoge
+    build: ./
+    command: >
+      ./manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./jiaoge:/app/jiaoge
+      - ./manage.py:/app/manage.py
+    ports:
+      - "8000:8000"
+

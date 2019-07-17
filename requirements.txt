@@ -1,1 +1,8 @@
+# Core
 Django==2.2.3
+gunicorn
+pytz
+
+# Database
+psycopg2-binary~=2.7.7
+
