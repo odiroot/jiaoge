@@ -24,8 +24,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 STATIC_URL = '/static/'
 
-ALLOWED_HOSTS = []
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -91,3 +89,7 @@ SECRET_KEY = env('SECRET_KEY')
 DATABASES = {
     'default': env.db(),
 }
+
+ALLOWED_HOSTS = [
+    env('HEROKU_DOMAIN', default=None)
+]
