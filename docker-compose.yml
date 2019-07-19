@@ -1,6 +1,15 @@
 version: '2'
 
 services:
+  db:
+    image: postgres:11-alpine
+    environment:
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - .docker/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
   web:
     restart: always
     environment:
