@@ -84,6 +84,7 @@ env = environ.Env()  # Parser for env-sourced configuration.
 
 DEBUG = env('DEBUG', cast=bool, default=False)
 SECRET_KEY = env('SECRET_KEY')
+ADMIN_URL = env('ADMIN_URL')
 
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 DATABASES = {
