@@ -1,10 +1,12 @@
 # Core
+boto3~=1.9.197
 Django==2.2.3
 gunicorn
 pytz
 
 # Django addons
 django-environ~=0.4.5
+django-storages~=1.7.1
 
 # Database
 psycopg2-binary~=2.7.7
