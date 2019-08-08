@@ -21,6 +21,8 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+# Keep media files separately from static files.
+DEFAULT_FILE_STORAGE = 'jiaoge.storage.S3MediaStorage'
 # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
@@ -31,6 +33,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'storages',
 
     'users',
 ]
@@ -106,8 +110,11 @@ AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID', default=None)
 AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', default=None)
 AWS_DEFAULT_ACL = env('AWS_DEFAULT_ACL', default=None)
 AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME', default=None)
-AWS_LOCATION = env('AWS_LOCATION', default='static/')
+AWS_LOCATION = env('AWS_LOCATION', default='static')
 AWS_S3_FILE_OVERWRITE = env('AWS_S3_FILE_OVERWRITE', default=True)
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-STATIC_URL = "https://%s/" % (AWS_S3_CUSTOM_DOMAIN)
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
