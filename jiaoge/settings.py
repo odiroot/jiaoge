@@ -25,6 +25,10 @@ USE_TZ = True
 DEFAULT_FILE_STORAGE = 'jiaoge.storage.S3MediaStorage'
 # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# For filesystem finder (global statics).
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
