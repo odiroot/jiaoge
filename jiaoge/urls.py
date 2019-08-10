@@ -22,3 +22,7 @@ urlpatterns = [
     # Hide the Admin panel a bit.
     path(settings.ADMIN_URL, admin.site.urls),
 ]
+
+# TODO:
+# Claim route: "/route"
+# Accessible via tinyurl.com/JIAOGE/<id> when on Heroku.

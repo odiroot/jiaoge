@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'storages',
+    'django_countries',
 
     'users',
+    'postcards',
 ]
 
 MIDDLEWARE = [
@@ -98,6 +100,7 @@ env = environ.Env()  # Parser for env-sourced configuration.
 
 DEBUG = env('DEBUG', cast=bool, default=False)
 SECRET_KEY = env('SECRET_KEY')
+HASHID_FIELD_SALT = env('HASHID_FIELD_SALT')  # Salt for hashids lib.
 ADMIN_URL = env('ADMIN_URL')
 
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
