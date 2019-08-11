@@ -7,6 +7,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 import environ  # django-environ for 12-factor app compatible settings.
+import sentry_sdk  # Sentry for error reporting.
+from sentry_sdk.integrations.django import DjangoIntegration
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -125,3 +127,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+
+
+SENTRY_DSN = env('SENTRY_DSN', default=None)
+sentry_sdk.init(dsn=SENTRY_DSN, integrations=[DjangoIntegration()])
