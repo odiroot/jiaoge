@@ -23,7 +23,7 @@ class Contact(UUIDMixin, models.Model):
 class Card(models.Model):
     id = HashidAutoField(
         primary_key=True, editable=False,
-        min_length=3, alphabet=ascii_uppercase + digits,
+        min_length=5, alphabet=ascii_uppercase + digits,
         verbose_name='Readable postcard ID')
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     face = models.ImageField(
@@ -36,6 +36,7 @@ class Card(models.Model):
         blank=True, verbose_name='Receiver')
     sent_at = models.DateTimeField(null=True)
     received_at = models.DateTimeField(null=True, blank=True)
+    claim_comment = models.CharField(max_length=100, null=False, blank=True)
 
     def __str__(self):
         receiver = self.to and self.to.name or 'N/A'

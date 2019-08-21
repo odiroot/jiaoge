@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Claim postcard: {{ object.pk }}{% endblock %}
+
+{% block body %}
+<h1 title="You recieved a postcard!"> 📩😊</h1>
+
+<p>
+    <span title="From">🌍➡️</span>
+    {{ object.from_city }}, {{ object.from_country.name }}
+</p>
+<p>
+    <span title="Sent at">🗓️⌚</span>
+    {{ object.sent_at }}
+</p>
+
+<form action="" method="POST">
+    <fieldset>
+        {% csrf_token %}
+
+        <label for="claim_comment" title="Write me a comment">✍️📄(❓)</label>
+        {{ form.claim_comment }}
+
+        <input type="submit" value="✅ OK" title="I've received it!"
+               class="button-primary" />
+    <fieldset>
+</form>
+
+{% endblock %}

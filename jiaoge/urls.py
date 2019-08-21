@@ -17,12 +17,15 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path
 
+from postcards.views import CardClaimView, claim_success
+
 
 urlpatterns = [
     # Hide the Admin panel a bit.
     path(settings.ADMIN_URL, admin.site.urls),
-]
 
-# TODO:
-# Claim route: "/route"
-# Accessible via tinyurl.com/JIAOGE/<id> when on Heroku.
+    # TODO: Move to app sub-urls.
+    # Accessible via tinyurl.com/JIAOGE/<id> when on Heroku.
+    path(r'claim/<pk>/', CardClaimView.as_view()),
+    path(r'claimed/', claim_success, name='claim_success')
+]
