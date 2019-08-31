@@ -29,3 +29,9 @@ jobs:
     - name: Run unit tests
       run: |
         python manage.py test
+      env:
+        SECRET_KEY: foobarquxham
+        ADMIN_URL: admin_test/
+        HEROKU_DOMAIN: localhost
+        HASHID_FIELD_SALT: foobarquxham
+        
