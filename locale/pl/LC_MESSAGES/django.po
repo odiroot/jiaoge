@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-31 18:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+#: postcards/templates/postcards/card_detail.html:4
+#, fuzzy
+#| msgid "Postcards"
+msgid "Claim postcard"
+msgstr "Pocztówki"
+
+#: postcards/templates/postcards/card_detail.html:7
+msgid "Yay, got a postcard!"
+msgstr "Ojej, pocztówka!"
+
+#: postcards/templates/postcards/card_detail.html:10
+msgid "From"
+msgstr "Skąd"
+
+#: postcards/templates/postcards/card_detail.html:14
+msgid "Sent at"
+msgstr "Wysłana"
+
+#: postcards/templates/postcards/card_detail.html:22
+msgid "Comments (optional)"
+msgstr "Komentarz (opcjonalny)"
+
+#: postcards/templates/postcards/card_detail.html:25
+msgid "Confirm"
+msgstr "Potwierdź"
+
+#: postcards/templates/postcards/claimed.html:4
+msgid "Claimed postcard"
+msgstr "Potwierdzono przyjęcie"
+
+#: postcards/templates/postcards/claimed.html:7
+msgid "Thank you!"
+msgstr "Dziękuję"
+
+#: templates/base.html:15
+msgid "Postcards"
+msgstr "Pocztówki"

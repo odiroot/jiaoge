@@ -1,16 +1,17 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Claim postcard: {{ object.pk }}{% endblock %}
+{% block title %}{% trans 'Claim postcard' %}: {{ object.pk }}{% endblock %}
 
 {% block body %}
-<h1 title="You recieved a postcard!"> 📩😊</h1>
+<h3>📩 {% trans 'Yay, got a postcard!' %}</h3>
 
 <p>
-    <span title="From">🌍➡️</span>
+    <span>🌍➡️{% trans 'From' %}:</span>
     {{ object.from_city }}, {{ object.from_country.name }}
 </p>
 <p>
-    <span title="Sent at">🗓️⌚</span>
+    <span>🗓️⌚{% trans 'Sent at' %}:</span>
     {{ object.sent_at }}
 </p>
 
@@ -18,10 +19,10 @@
     <fieldset>
         {% csrf_token %}
 
-        <label for="claim_comment" title="Write me a comment">✍️📄(❓)</label>
+        <label for="claim_comment">✍️📄 {% trans 'Comments (optional)' %}</label>
         {{ form.claim_comment }}
 
-        <input type="submit" value="✅ OK" title="I've received it!"
+        <input type="submit" value="✅ {% trans 'Confirm' %}" title="I've received it!"
                class="button-primary" />
     <fieldset>
 </form>
