@@ -25,7 +25,6 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
 
     # TODO: Move to app sub-urls.
-    # Accessible via tinyurl.com/JIAOGE/<id> when on Heroku.
     path(r'claim/<pk>/', CardClaimView.as_view()),
     path(r'claimed/', claim_success, name='claim_success')
 ]
