@@ -3,6 +3,40 @@ _Keeping track of postcards if you're into it_
 
 ![https://www.flickr.com/photos/postmark_china/7751502180/](./postcard.jpg)
 
+
+# Quickstart
+
+## Requirements
+
+* _Heroku_ account (free tier is good as well).
+* _Amazon Web Services_ account (free tier works here too).
+    * _S3_ bucket, not exposed to the public by default.
+    * _IAM_ credentials for non-root user.
+
+## Setup
+
+1. Create a new application on Heroku, use the newest stack (`heroku-18`).
+2. Add _Heroku Postgres_ add-on (_Hobby Dev_ suffices).
+3. Add _Sentry_ add-on if you want to track errors.
+4. Add `heroku/python` buildpack.
+5. Add `heroku-community/apt` buildpack.
+6. Connect your (clone of this one) _Github_ repository to your Heroku app.
+7. Set the _Config Vars_.
+    * `ADMIN_URL` -- generate some hard to guess string in a form of `foo/`.
+    * `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` -- your IAM credentials.
+    * `AWS_STORAGE_BUCKET_NAME` -- name of your S3 bucket.
+    * `HASHID_FIELD_SALT` -- generate another hard to guess long string.
+    * `HEROKU_DOMAIN` -- the domain you access the app at. e.g.: `myproject.herokuapp.com`.
+
+## First run
+1. Use the _Manual deploy_ feature on Heroku to deploy `master` branch.
+2. Wait until the deployment is done.
+3. Select a _Free_ dyno tier for the `web` dyno.
+4. Enable the `web` dyno to start it.
+5. Spawn a shell session for the app: `heroku run -a <your app name> bash`
+6. Push the static files to S3: `./manage.py collectstatic`.
+
+
 # Why
 I personally send a lot of postcards to my family and friends whenever I'm
 traveling.
