@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Claim postcard with code' %}{% endblock %}
+
+{% block body %}
+<h3>📩 {% trans 'Yay, got a postcard!' %}</h3>
+
+<form action="" method="POST">
+    <fieldset>
+        {% csrf_token %}
+
+        <label for="code">🔑 {% trans 'Code (required)' %}</label>
+        {{ form.code }}
+
+        <label for="claim_comment">📄 {% trans 'Comments (optional)' %}</label>
+        {{ form.claim_comment }}
+
+        <input type="submit" value="✅ {% trans 'Confirm' %}" title="I've received it!"
+               class="button-primary" />
+    <fieldset>
+</form>
+
+{% endblock %}

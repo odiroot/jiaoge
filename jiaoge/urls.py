@@ -17,7 +17,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path
 
-from postcards.views import CardClaimView, claim_success
+from postcards.views import CardClaimView, claim_success, CodeClaimView
 
 
 urlpatterns = [
@@ -26,5 +26,6 @@ urlpatterns = [
 
     # TODO: Move to app sub-urls.
     path(r'claim/<pk>/', CardClaimView.as_view()),
+    path(r'code-claim/', CodeClaimView.as_view()),
     path(r'claimed/', claim_success, name='claim_success')
 ]

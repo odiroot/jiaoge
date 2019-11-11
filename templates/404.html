@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+{% block title %}{% trans 'Nothing here' %}{% endblock %}
+
+{% block body %}
+<h3>{% trans "Couldn't find what you were looking for" %} 😔</h3>
+
+<p>{{ exception }}</p>
+
+{% endblock %}

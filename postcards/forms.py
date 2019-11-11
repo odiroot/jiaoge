@@ -10,3 +10,10 @@ class CardClaimForm(forms.ModelForm):
 
     claim_comment = forms.CharField(
         label='Comment', max_length=160, required=False, widget=forms.Textarea)
+
+
+class CodeClaimForm(forms.Form):
+    code = forms.CharField(
+        label='Code', max_length=8, min_length=5, required=True)
+    claim_comment = forms.CharField(
+        label='Comment', max_length=160, required=False, widget=forms.Textarea)
