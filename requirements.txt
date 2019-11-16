@@ -8,7 +8,7 @@ pytz
 django-countries~=5.5
 django-environ~=0.4.5
 django-hashid-field~=2.1.6
-django-storages~=1.7.1
+django-storages~=1.7.2
 
 # Database
 psycopg2-binary~=2.7.7
