@@ -27,7 +27,7 @@ USE_TZ = True
 # Keep media files separately from static files.
 DEFAULT_FILE_STORAGE = 'jiaoge.storage.S3MediaStorage'
 # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'jiaoge.storage.S3StaticStorage'
 # For filesystem finder (global statics).
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
@@ -126,17 +126,13 @@ ALLOWED_HOSTS = [
 # Static file config.
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID', default=None)
 AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', default=None)
-AWS_DEFAULT_ACL = env('AWS_DEFAULT_ACL', default=None)
 AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME', default=None)
-AWS_LOCATION = env('AWS_LOCATION', default='static')
-AWS_S3_FILE_OVERWRITE = env('AWS_S3_FILE_OVERWRITE', default=True)
+AWS_S3_REGION_NAME = env('AWS_S3_REGION_NAME', default='eu-central-1')
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-STATIC_URL = 'https://%s.s3.amazonaws.com/%s/' % (
-    AWS_STORAGE_BUCKET_NAME, AWS_LOCATION)
-
+STATIC_URL = 'https://%s.s3.amazonaws.com/static/' % AWS_STORAGE_BUCKET_NAME
 
 SENTRY_DSN = env('SENTRY_DSN', default=None)
 sentry_sdk.init(dsn=SENTRY_DSN, integrations=[DjangoIntegration()])
