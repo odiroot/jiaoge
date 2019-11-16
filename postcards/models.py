@@ -6,6 +6,7 @@ from django_countries.fields import CountryField
 from hashid_field import HashidAutoField
 
 from common.models import UUIDMixin
+from jiaoge.storage import S3MediaStorage
 
 
 def face_upload_path(instance, filename):
@@ -30,8 +31,8 @@ class Card(models.Model):
         verbose_name='Readable postcard ID')
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     face = models.ImageField(
-        upload_to=face_upload_path, verbose_name='Postcard face design',
-        blank=True)
+        upload_to=face_upload_path, storage=S3MediaStorage(),
+        verbose_name='Postcard face design', blank=True)
     from_country = CountryField()
     from_city = models.CharField(max_length=32)
     to = models.ForeignKey(
