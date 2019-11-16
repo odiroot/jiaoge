@@ -1,3 +1,4 @@
+from datetime import date
 from string import ascii_uppercase, digits
 
 from django.db import models
@@ -8,7 +9,9 @@ from common.models import UUIDMixin
 
 
 def face_upload_path(instance, filename):
-    return f'postcards/{instance.id}-{filename}'
+    today = date.today().isoformat()
+    # Date _ City of origin _ Upload filename.
+    return f'postcards/{today}_{instance.from_city}_{filename}'
 
 
 class Contact(UUIDMixin, models.Model):
