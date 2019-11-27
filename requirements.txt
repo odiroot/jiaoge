@@ -17,4 +17,4 @@ psycopg2-binary~=2.8.4
 Pillow~=6.2.1  # For ImageField.
 
 # Non-lib tools.
-sentry-sdk~=0.13.2
+sentry-sdk~=0.13.4
