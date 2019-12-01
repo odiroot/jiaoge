@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-21 20:43+0000\n"
+"POT-Creation-Date: 2019-12-01 16:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,6 +23,7 @@ msgid "Claim postcard"
 msgstr "Postkarte bestätigen"
 
 #: postcards/templates/postcards/card_detail.html:7
+#: postcards/templates/postcards/code_claim.html:7
 msgid "Yay, got a postcard!"
 msgstr "Juhu, ich habe eine Postkarte!"
 
@@ -35,10 +36,12 @@ msgid "Sent at"
 msgstr "Gesendet an"
 
 #: postcards/templates/postcards/card_detail.html:22
+#: postcards/templates/postcards/code_claim.html:16
 msgid "Comments (optional)"
 msgstr "Kommentare (optional)"
 
 #: postcards/templates/postcards/card_detail.html:25
+#: postcards/templates/postcards/code_claim.html:19
 msgid "Confirm"
 msgstr "Bestätigen"
 
@@ -49,6 +52,22 @@ msgstr "Postkarte bestätigt"
 #: postcards/templates/postcards/claimed.html:7
 msgid "Thank you!"
 msgstr "Vielen Dank!"
+
+#: postcards/templates/postcards/code_claim.html:4
+msgid "Claim postcard with code"
+msgstr "Postkarte bestätigen mit Code"
+
+#: postcards/templates/postcards/code_claim.html:13
+msgid "Code (required)"
+msgstr "Aktivierungscode (Pflichtfeld)"
+
+#: templates/404.html:5
+msgid "Nothing here"
+msgstr "Hier ist nix"
+
+#: templates/404.html:8
+msgid "Couldn't find what you were looking for"
+msgstr "Die Seite wurde nicht gefunden"
 
 #: templates/base.html:19
 msgid "Postcards"
