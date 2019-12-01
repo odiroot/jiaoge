@@ -52,4 +52,14 @@ class CardAdmin(admin.ModelAdmin):
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        'name',
+        'country',
+        'language',
+    )
+
+    list_filter = (
+        'language',
+    )
+
+    ordering = ('name',)

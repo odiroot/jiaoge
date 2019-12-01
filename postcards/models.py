@@ -16,9 +16,19 @@ def face_upload_path(instance, filename):
 
 
 class Contact(UUIDMixin, models.Model):
+    SUPPORTED_LANGUAGES = [
+        ('en', 'English'),
+        ('de', 'German'),
+        ('pl', 'Polish'),
+    ]
+    DEFAULT_LANGUAGE = 'en'
+
     name = models.CharField(max_length=64)
     country = CountryField()
     city = models.CharField(max_length=32)
+    language = models.CharField(
+        max_length=2, null=True, blank=True,
+        choices=SUPPORTED_LANGUAGES, default=DEFAULT_LANGUAGE)
 
     def __str__(self):
         return f'{self.name} in {self.city}'
