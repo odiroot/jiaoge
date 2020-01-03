@@ -1,5 +1,5 @@
 # Core
-boto3~=1.10.45
+boto3~=1.10.46
 Django==3.0.1
 gunicorn
 pytz
