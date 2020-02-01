@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, reverse, get_object_or_404
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, FormView, ListView
 from django.views.generic.edit import FormMixin
@@ -73,7 +74,6 @@ def claim_success(request):
 class PregenerateView(FormView):
     form_class = PregenerateForm
     template_name = 'postcards/pregenerate.html'
-    # TODO: Post-submit redirect to list of postcards (with codes and lang!)
 
     def form_valid(self, form):
         to_save = []
@@ -103,6 +103,11 @@ LIST_MODES = [
 
 @method_decorator(staff_member_required, name='dispatch')
 class CardListView(ListView):
+    def setup(self, request, *args, **kwargs):
+        # Make the date display nicer.
+        timezone.activate(request.user.timezone)
+        return super().setup(request, *args, **kwargs)
+
     def get_queryset(self, **kwargs):
         qs = Card.objects
         mode = self.request.GET.get('mode', None)

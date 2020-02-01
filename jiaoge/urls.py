@@ -2,39 +2,26 @@
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
-from postcards.views import (
-    CardClaimView, CardListView, claim_success, CodeClaimView, PregenerateView)
+from postcards.urls import doc_paths, router
 from .views import landing
 
 
 urlpatterns = [
     # Hide the Admin panel a bit.
     path(settings.ADMIN_URL, admin.site.urls),
-
+    # Landing/start page.
     path(r'', landing, name='landing'),
 
-    # TODO: Move to app sub-urls.
-    # Receiver-facing: claiming.
-    path(r'claim/<pk>/', CardClaimView.as_view(), name='claim_direct'),
-    path(r'code-claim/', CodeClaimView.as_view()),
-    path(r'claimed/', claim_success, name='claim_success'),
-
-    # Creator-facing: create/manage.
-    path(r'pregenerate/', PregenerateView.as_view(), name='pregenerate'),
-    path(r'list/', CardListView.as_view(), name='list_cards')
+    # POSTCARD VIEWS #
+    # Classic HTML-based views.
+    path(r'', include(doc_paths)),
+    # JSON API views.
+    path(r'api/', include(router.urls)),
+    path(r'api-auth/',
+         include('rest_framework.urls', namespace='rest_framework')),
 ]

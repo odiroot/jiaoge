@@ -1,6 +1,7 @@
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin)
 from django.db import models
+from timezone_field import TimeZoneField
 
 from common.models import UUIDMixin
 
@@ -48,6 +49,7 @@ class User(UUIDMixin, AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
 
     date_joined = models.DateTimeField(auto_now_add=True)
+    timezone = TimeZoneField(default='Europe/Paris')
 
     USERNAME_FIELD = EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []

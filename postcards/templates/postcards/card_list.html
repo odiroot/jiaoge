@@ -1,8 +1,17 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load tz %}
 {% load static %}
 
 {% block title %}{% trans 'Existing postcards' %}{% endblock %}
+
+{% block css %}
+<style type="text/css">
+    .delete, .send {
+        cursor: pointer;
+    }
+</style>
+{% endblock %}
 
 {% block body %}
 <h3>Postcard list</h3>
@@ -19,7 +28,7 @@
     </thead>
     <tbody>
         {% for card in object_list %}
-        <tr>
+        <tr data-id="{{ card.id }}">
             <td>
                 <img src="{{ card.from_country.flag }}">
                 {{ card.from_city }}, {{ card.from_country.name }}
@@ -33,14 +42,14 @@
                     <em>{{ card.id }}</em>
                 </span>
                 <br>
-                <small>📥 {{ card.received_at }}</small>
+                <small>📥 {{ card.received_at|localtime }}</small>
                 {% elif card.is_sent %}
                 <a href="{% url 'claim_direct' pk=card.id %}"
                         target="_blank" title="{% trans 'Claim page' %}">
                     {{ card.id }}
                 </a>
                 <br>
-                <small>📨 {{ card.sent_at }}</small>
+                <small>📨 {{ card.sent_at|localtime }}</small>
                 {% else %}
                 <span title="{% trans 'Unsent' %}">
                     <strong>{{ card.id }}</strong>
@@ -56,14 +65,65 @@
             </td>
             <td>
                 {% if not card.is_sent %}
-                <span title="{% trans 'Dispatch' %}">📨</span>
+                <span title="{% trans 'Dispatch' %}" class="send">📨</span>
                 &nbsp;
-                <span title="{% trans 'Remove' %}">🗑️</span>
+                <span title="{% trans 'Remove' %}" class="delete">🗑️</span>
                 {% endif %}
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+{% csrf_token %}
+
+<script
+    src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"
+    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+    crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    let token = $("[name=csrfmiddlewaretoken]").val();
+
+    $(".send").click((e) => {
+        let $el = $(e.target);
+        let $cell = $el.parents("td");
+        let $row = $cell.parents("tr");
+        let id = $row.data("id");
+
+        let answer = confirm(`Send out: ${id}?`);
+
+        if(answer) {
+            fetch(`/api/cards/${id}/send/`, {
+                "credentials": "include",
+                "method": "POST",
+                "headers": {
+                    "X-CSRFToken": token
+                }
+            }).then((resp) => {
+                resp.ok && $cell.empty();
+            });
+        }
+    });
+
+    $(".delete").click((e) => {
+        let $el = $(e.target);
+        let $row = $el.parents("tr");
+        let id = $row.data("id");
+
+        let answer = confirm(`Delete: ${id}?`);
+        if(answer) {
+            fetch(`/api/cards/${id}/`, {
+                "credentials": "include",
+                "method": "DELETE",
+                "headers": {
+                    "X-CSRFToken": token
+                }
+            }).then((resp) => {
+                resp.ok && $row.remove();
+            });
+        }
+    });
+</script>
 
 {% endblock %}

@@ -48,6 +48,8 @@ INSTALLED_APPS = [
 
     'storages',
     'django_countries',
+    'rest_framework',
+    'timezone_field',
 
     'users',
     'postcards',
@@ -105,6 +107,17 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.2/topics/auth/customizing/
 # #specifying-custom-user-model
 AUTH_USER_MODEL = 'users.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    # Enforce authentication for the whole API.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
 
 # PARSED FROM ENVIRONMENT #
 env = environ.Env()  # Parser for env-sourced configuration.
