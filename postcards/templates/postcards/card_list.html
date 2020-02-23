@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'Existing postcards' %}{% endblock %}
+
+{% block body %}
+<h3>Postcard list</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>{% trans 'From' %}</th>
+            <th>{% trans 'To' %}</th>
+            <th>{% trans 'Code' %}</th>
+            <th>{% trans 'Face' %}</th>
+            <th>{% trans 'Actions' %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for card in object_list %}
+        <tr>
+            <td>
+                <img src="{{ card.from_country.flag }}">
+                {{ card.from_city }}, {{ card.from_country.name }}
+            </td>
+            <td>
+                {{ card.to.name }} ({{ card.to.city }})
+            </td>
+            <td>
+                {% if card.is_claimed %}
+                <span title="{% trans 'Claimed' %}">
+                    <em>{{ card.id }}</em>
+                </span>
+                <br>
+                <small>📥 {{ card.received_at }}</small>
+                {% elif card.is_sent %}
+                <a href="{% url 'claim_direct' pk=card.id %}"
+                        target="_blank" title="{% trans 'Claim page' %}">
+                    {{ card.id }}
+                </a>
+                <br>
+                <small>📨 {{ card.sent_at }}</small>
+                {% else %}
+                <span title="{% trans 'Unsent' %}">
+                    <strong>{{ card.id }}</strong>
+                </span>
+                {% endif %}
+            </td>
+            <td>
+                {% if card.face  %}
+                <a href="{{ card.face.url }}" target="_blank">✔️</a>
+                {% else %}
+                ❌
+                {% endif %}
+            </td>
+            <td>
+                <span title="{% trans 'Dispatch' %}">📨</span>
+                &nbsp;
+                <span title="{% trans 'Remove' %}">🗑️</span>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

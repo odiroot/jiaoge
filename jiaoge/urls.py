@@ -17,7 +17,8 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path
 
-from postcards.views import CardClaimView, claim_success, CodeClaimView
+from postcards.views import (
+    CardClaimView, CardListView, claim_success, CodeClaimView, PregenerateView)
 
 
 urlpatterns = [
@@ -25,7 +26,12 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
 
     # TODO: Move to app sub-urls.
-    path(r'claim/<pk>/', CardClaimView.as_view()),
+    # Receiver-facing: claiming.
+    path(r'claim/<pk>/', CardClaimView.as_view(), name='claim_direct'),
     path(r'code-claim/', CodeClaimView.as_view()),
-    path(r'claimed/', claim_success, name='claim_success')
+    path(r'claimed/', claim_success, name='claim_success'),
+
+    # Creator-facing: create/manage.
+    path(r'pregenerate/', PregenerateView.as_view(), name='pregenerate'),
+    path(r'list/', CardListView.as_view(), name='list_cards')
 ]

@@ -31,7 +31,7 @@ class Contact(UUIDMixin, models.Model):
         choices=SUPPORTED_LANGUAGES, default=DEFAULT_LANGUAGE)
 
     def __str__(self):
-        return f'{self.name} in {self.city}'
+        return f'{self.name} in {self.city}, {self.country}'
 
 
 class Card(models.Model):
@@ -48,7 +48,7 @@ class Card(models.Model):
     to = models.ForeignKey(
         Contact, null=True, on_delete=models.SET_NULL, related_name='cards',
         blank=True, verbose_name='Receiver')
-    sent_at = models.DateTimeField(null=True)
+    sent_at = models.DateTimeField(null=True, blank=True)
     received_at = models.DateTimeField(null=True, blank=True)
     claim_comment = models.CharField(max_length=100, null=False, blank=True)
 
@@ -57,3 +57,11 @@ class Card(models.Model):
 
         return (f'Postcard from: {self.from_country}/{self.from_city} '
                 f'to {receiver}')
+
+    @property
+    def is_sent(self):
+        return self.sent_at is not None
+
+    @property
+    def is_claimed(self):
+        return self.received_at is not None

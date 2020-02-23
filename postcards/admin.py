@@ -16,7 +16,6 @@ class ReceivedFilter(admin.SimpleListFilter):
         )
 
     def queryset(self, request, queryset):
-        print(repr(self.value()))
         if self.value() == 'T':
             return queryset.filter(received_at__isnull=False)
         if self.value() == 'F':
@@ -27,8 +26,7 @@ class ReceivedFilter(admin.SimpleListFilter):
 @admin.register(Card)
 class CardAdmin(admin.ModelAdmin):
     list_display = (
-        'from_country',
-        'from_city',
+        'sent_from',
         'to',
         'sent_at',
         'received_at',
@@ -49,12 +47,19 @@ class CardAdmin(admin.ModelAdmin):
 
         return timesince(obj.sent_at, obj.received_at)
 
+    def sent_from(self, obj):
+        if not obj.from_country and not obj.from_city:
+            return
+
+        return (
+            f'{obj.from_country.unicode_flag}'
+            f' {obj.from_city}, {obj.from_country}')
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     list_display = (
         'name',
-        'country',
+        'place',
         'language',
     )
 
@@ -63,3 +68,9 @@ class ContactAdmin(admin.ModelAdmin):
     )
 
     ordering = ('name',)
+
+    def place(self, obj):
+        if not obj.country:
+            return
+
+        return f'{obj.country.unicode_flag} {obj.city}, {obj.country.name}'

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'Batch generate postcards' %}{% endblock %}
+
+{% block css %}
+<link href="{% static 'css/multi-select.dist.css' %}" media="screen"
+    rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block body %}
+<h3>Pregenerate empty postcards for a trip</h3>
+
+<form action="" method="POST">
+    <fieldset>
+        {% csrf_token %}
+        {{ form.as_p }}
+    </fieldset>
+
+    <input type="submit" value="{% trans 'Generate' %}"  class="button-primary" />
+</form>
+
+<script
+    src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"
+    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+    crossorigin="anonymous"></script>
+<script src="{% static 'js/jquery.multi-select.js' %}"
+    type="text/javascript"></script>
+
+<script type="text/javascript">
+    $('select.multi').multiSelect({
+        'selectableHeader': '👨‍👩‍👧‍👦',
+        'selectionHeader': '☑️',
+    });
+</script>
+{% endblock %}

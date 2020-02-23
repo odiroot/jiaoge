@@ -124,6 +124,7 @@ ALLOWED_HOSTS = [
 ]
 
 # Static file config.
+AWS_DEFAULT_ACL = None
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID', default=None)
 AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', default=None)
 AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME', default=None)

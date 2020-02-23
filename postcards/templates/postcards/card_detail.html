@@ -9,6 +9,7 @@
 <p>
     <span>🌍➡️{% trans 'From' %}:</span>
     {{ object.from_city }}, {{ object.from_country.name }}
+    <img src="{{ object.from_country.flag }}">
 </p>
 <p>
     <span>🗓️⌚{% trans 'Sent at' %}:</span>
