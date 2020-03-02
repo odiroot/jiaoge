@@ -3,4 +3,4 @@
 # Developer tools
 flake8
 ipdb
-ipython~=7.11.1
+ipython~=7.13.0
