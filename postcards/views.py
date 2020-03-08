@@ -90,7 +90,7 @@ class PregenerateView(FormView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('list_cards')
+        return reverse('list_cards') + '?mode=unsent'
 
 
 LIST_MODES = [

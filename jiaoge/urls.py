@@ -19,11 +19,14 @@ from django.urls import path
 
 from postcards.views import (
     CardClaimView, CardListView, claim_success, CodeClaimView, PregenerateView)
+from .views import landing
 
 
 urlpatterns = [
     # Hide the Admin panel a bit.
     path(settings.ADMIN_URL, admin.site.urls),
+
+    path(r'', landing, name='landing'),
 
     # TODO: Move to app sub-urls.
     # Receiver-facing: claiming.

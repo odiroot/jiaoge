@@ -55,9 +55,11 @@
                 {% endif %}
             </td>
             <td>
+                {% if not card.is_sent %}
                 <span title="{% trans 'Dispatch' %}">📨</span>
                 &nbsp;
                 <span title="{% trans 'Remove' %}">🗑️</span>
+                {% endif %}
             </td>
         </tr>
         {% endfor %}

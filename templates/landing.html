@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'Postcards app' %}{% endblock %}
+
+{% block body %}
+<h1>Postcards</h1>
+
+<ul>
+    <li>
+        🔧
+        <a href="{% url 'admin:index' %}">Admin pages</a>
+    </li>
+    <li>
+        🗂️
+        <a href="{% url 'list_cards' %}">All postcards</a>
+    </li>
+    <li>
+        ⚙️
+        <a href="{% url 'list_cards' %}?mode=unsent">
+            Postcards <strong>to be sent</strong>
+        </a>
+    </li>
+    <li>
+        📤
+        <a href="{% url 'list_cards' %}?mode=unclaimed">
+            Postcards <strong>to be claimed</strong>
+        </a>
+    </li>
+    <li>
+        🏭
+        <a href="{% url 'pregenerate' %}">
+            Generate batch of postcards
+        </a>
+    </li>
+</ul>
+{% endblock %}
