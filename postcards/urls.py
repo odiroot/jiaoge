@@ -23,5 +23,5 @@ router.register(r'cards', CardViewSet)
 router.register(r'contacts', ContactViewSet)
 
 api_paths = [
-    path(r'cards/<pk>/face', CardFaceView.as_view()),
+    path(r'cards/<pk>/face', CardFaceView.as_view(), name='upload_face'),
 ]
