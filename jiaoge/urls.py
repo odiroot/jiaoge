@@ -7,7 +7,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 
-from postcards.urls import doc_paths, router
+from postcards.urls import api_paths, doc_paths, router
 from .views import landing
 
 
@@ -24,4 +24,6 @@ urlpatterns = [
     path(r'api/', include(router.urls)),
     path(r'api-auth/',
          include('rest_framework.urls', namespace='rest_framework')),
+    # Extra JSON API paths.
+    path(r'api/', include(api_paths))
 ]

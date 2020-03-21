@@ -1,7 +1,7 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
-from .api import CardViewSet, ContactViewSet
+from .api import CardViewSet, CardFaceView, ContactViewSet
 from .views import (
     CardClaimView, CardListView, claim_success, CodeClaimView, PregenerateView)
 
@@ -21,3 +21,7 @@ doc_paths = [
 router = DefaultRouter()
 router.register(r'cards', CardViewSet)
 router.register(r'contacts', ContactViewSet)
+
+api_paths = [
+    path(r'cards/<pk>/face', CardFaceView.as_view()),
+]

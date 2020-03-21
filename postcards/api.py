@@ -1,12 +1,14 @@
 from datetime import datetime
 
 from rest_framework.decorators import action
+from rest_framework.generics import UpdateAPIView
+from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_409_CONFLICT
 from rest_framework.viewsets import ModelViewSet
 
 from .models import Card, Contact
-from .serializers import CardSerializer, ContactSerializer
+from .serializers import CardSerializer, CardFaceSerializer, ContactSerializer
 
 
 class CardViewSet(ModelViewSet):
@@ -30,6 +32,12 @@ class CardViewSet(ModelViewSet):
         card.save()
 
         return Response(status=200)
+
+
+class CardFaceView(UpdateAPIView):
+    queryset = Card.objects.all()
+    serializer_class = CardFaceSerializer
+    parser_class = (FileUploadParser,)
 
 
 class ContactViewSet(ModelViewSet):
