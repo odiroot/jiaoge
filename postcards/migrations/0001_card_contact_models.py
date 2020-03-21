@@ -15,10 +15,10 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Contact',
+            name="Contact",
             fields=[
                 (
-                    'id',
+                    "id",
                     models.UUIDField(
                         default=uuid.uuid4,
                         editable=False,
@@ -26,51 +26,54 @@ class Migration(migrations.Migration):
                         serialize=False,
                     ),
                 ),
-                ('name', models.CharField(max_length=64)),
-                ('country', django_countries.fields.CountryField(max_length=2)),
-                ('city', models.CharField(max_length=32)),
+                ("name", models.CharField(max_length=64)),
+                (
+                    "country",
+                    django_countries.fields.CountryField(max_length=2),
+                ),
+                ("city", models.CharField(max_length=32)),
             ],
             bases=(common.models.UUIDMixin, models.Model),
         ),
         migrations.CreateModel(
-            name='Card',
+            name="Card",
             fields=[
                 (
-                    'id',
+                    "id",
                     hashid_field.field.HashidAutoField(
-                        alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+                        alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
                         editable=False,
                         min_length=3,
                         primary_key=True,
                         serialize=False,
-                        verbose_name='Readable postcard ID',
+                        verbose_name="Readable postcard ID",
                     ),
                 ),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
                 (
-                    'face',
+                    "face",
                     models.ImageField(
                         blank=True,
                         upload_to=postcards.models.face_upload_path,
-                        verbose_name='Postcard face design',
+                        verbose_name="Postcard face design",
                     ),
                 ),
                 (
-                    'from_country',
+                    "from_country",
                     django_countries.fields.CountryField(max_length=2),
                 ),
-                ('from_city', models.CharField(max_length=32)),
-                ('received_at', models.DateTimeField(blank=True, null=True)),
-                ('sent_at', models.DateTimeField(null=True)),
+                ("from_city", models.CharField(max_length=32)),
+                ("received_at", models.DateTimeField(blank=True, null=True)),
+                ("sent_at", models.DateTimeField(null=True)),
                 (
-                    'to',
+                    "to",
                     models.ForeignKey(
                         blank=True,
                         null=True,
                         on_delete=django.db.models.deletion.SET_NULL,
-                        related_name='cards',
-                        to='postcards.Contact',
-                        verbose_name='Receiver',
+                        related_name="cards",
+                        to="postcards.Contact",
+                        verbose_name="Receiver",
                     ),
                 ),
             ],

@@ -8,29 +8,33 @@ import postcards.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('postcards', '0003_card_claim_comment'),
+        ("postcards", "0003_card_claim_comment"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='contact',
-            name='language',
+            model_name="contact",
+            name="language",
             field=models.CharField(
                 blank=True,
-                choices=[('en', 'English'), ('de', 'German'), ('pl', 'Polish')],
-                default='en',
+                choices=[
+                    ("en", "English"),
+                    ("de", "German"),
+                    ("pl", "Polish"),
+                ],
+                default="en",
                 max_length=2,
                 null=True,
             ),
         ),
         migrations.AlterField(
-            model_name='card',
-            name='face',
+            model_name="card",
+            name="face",
             field=models.ImageField(
                 blank=True,
                 storage=jiaoge.storage.S3MediaStorage(),
                 upload_to=postcards.models.face_upload_path,
-                verbose_name='Postcard face design',
+                verbose_name="Postcard face design",
             ),
         ),
     ]

@@ -8,17 +8,25 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (
             None,
-            {'fields': ('email', 'password', 'name', 'last_login', 'timezone')},
+            {
+                "fields": (
+                    "email",
+                    "password",
+                    "name",
+                    "last_login",
+                    "timezone",
+                )
+            },
         ),
         (
-            'Permissions',
+            "Permissions",
             {
-                'fields': (
-                    'is_active',
-                    'is_staff',
-                    'is_superuser',
-                    'groups',
-                    'user_permissions',
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "groups",
+                    "user_permissions",
                 )
             },
         ),
@@ -27,19 +35,19 @@ class UserAdmin(BaseUserAdmin):
         (
             None,
             {
-                'classes': ('wide',),
-                'fields': ('email', 'password1', 'password2'),
+                "classes": ("wide",),
+                "fields": ("email", "password1", "password2"),
             },
         ),
     )
 
-    list_display = ('email', 'name', 'is_staff', 'last_login')
-    list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')
-    search_fields = ('email',)
-    ordering = ('email',)
+    list_display = ("email", "name", "is_staff", "last_login")
+    list_filter = ("is_staff", "is_superuser", "is_active", "groups")
+    search_fields = ("email",)
+    ordering = ("email",)
     filter_horizontal = (
-        'groups',
-        'user_permissions',
+        "groups",
+        "user_permissions",
     )
 
 

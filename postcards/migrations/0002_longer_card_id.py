@@ -6,19 +6,19 @@ import hashid_field.field
 
 class Migration(migrations.Migration):
 
-    dependencies = [('postcards', '0001_card_contact_models')]
+    dependencies = [("postcards", "0001_card_contact_models")]
 
     operations = [
         migrations.AlterField(
-            model_name='card',
-            name='id',
+            model_name="card",
+            name="id",
             field=hashid_field.field.HashidAutoField(
-                alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+                alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
                 editable=False,
                 min_length=5,
                 primary_key=True,
                 serialize=False,
-                verbose_name='Readable postcard ID',
+                verbose_name="Readable postcard ID",
             ),
         )
     ]

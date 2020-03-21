@@ -4,4 +4,4 @@ from django.shortcuts import render
 
 @staff_member_required
 def landing(request):
-    return render(request, 'landing.html')
+    return render(request, "landing.html")

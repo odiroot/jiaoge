@@ -10,6 +10,9 @@
     .delete, .send {
         cursor: pointer;
     }
+    input.file {
+        display: none;
+    }
 </style>
 {% endblock %}
 
@@ -60,7 +63,11 @@
                 {% if card.face  %}
                 <a href="{{ card.face.url }}" target="_blank">✔️</a>
                 {% else %}
-                ❌
+                <form class="face" method="POST" enctype="multipart/form-data"
+                        target="{% url 'upload_face' pk=card.id %}">
+                    <input type="file" class="file" name="face">
+                    <span class='open'>❌</span>
+                </form>
                 {% endif %}
             </td>
             <td>
@@ -85,6 +92,41 @@
 <script type="text/javascript">
     let token = $("[name=csrfmiddlewaretoken]").val();
 
+    // No face (X) clicked -> start file selection.
+    $(".open").click((e) => {
+        let $el = $(e.target);
+        let $form = $el.parents("form");
+        let $file = $form.find("input.file")
+
+        $file.click();
+    });
+    // Face file selected -> trigger form submit (upload to API).
+    $("input.file").change((e) => {
+        let $el = $(e.target);
+        let $form = $el.parents("form");
+        let $cell = $form.parents("td");
+
+        let data = new FormData($form[0]);
+        let targetURL = $form.attr("target");
+
+        fetch(targetURL, {
+            "credentials": "include",
+            "method": "PUT",
+            "body": data,
+            "headers": {
+                "X-CSRFToken": token
+            }
+        })
+        .then((response) => response.json())
+        .then((resp) => {
+            let faceURL = resp.face;
+            $cell.empty();
+            $cell.append(`<a target="_blank" href="${faceURL}">✔️</a>`)
+        });
+
+    });
+
+    // Send postcard button clicked -> dispatch postcard.
     $(".send").click((e) => {
         let $el = $(e.target);
         let $cell = $el.parents("td");
@@ -106,6 +148,7 @@
         }
     });
 
+    // Delete postcard button clicked.
     $(".delete").click((e) => {
         let $el = $(e.target);
         let $row = $el.parents("tr");
