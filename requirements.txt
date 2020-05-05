@@ -1,6 +1,6 @@
 # Core
 boto3~=1.13.1
-Django~=3.0.5
+Django~=3.0.6
 gunicorn
 pytz
 
