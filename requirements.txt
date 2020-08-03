@@ -20,4 +20,4 @@ Pillow~=7.2.0  # For ImageField.
 markdown~=3.2.2  # For DRF.
 
 # Non-lib tools.
-sentry-sdk~=0.16.2
+sentry-sdk~=0.16.3
