@@ -13,7 +13,7 @@ django-storages~=1.11
 django-timezone-field~=4.1
 
 # Database
-psycopg2-binary~=2.8.6
+psycopg2-binary~=2.9.1
 
 # Additional libs.
 Pillow~=8.1.0  # For ImageField.
