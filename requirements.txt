@@ -7,7 +7,7 @@ pytz
 # Django addons
 django-countries~=7.2
 django-environ~=0.8.1
-django-hashid-field~=3.3.3
+django-hashid-field~=3.3.4
 djangorestframework~=3.13.1
 django-storages~=1.12
 django-timezone-field~=5.0
