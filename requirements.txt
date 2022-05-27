@@ -1,5 +1,5 @@
 # Core
-boto3~=1.23.8
+boto3~=1.23.9
 Django~=3.2
 gunicorn
 pytz
