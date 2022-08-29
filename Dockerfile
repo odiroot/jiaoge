@@ -1,13 +1,13 @@
 ### BUILD STAGE ###
-FROM python:3.7-alpine AS builder
+FROM python:3.10-alpine AS builder
 
 WORKDIR /app
 	
-ARG BUILD_DEPS="postgresql-dev gcc python-dev musl-dev libffi-dev libressl-dev"
+ARG BUILD_DEPS="postgresql-dev gcc python3-dev musl-dev libffi-dev libressl-dev zlib-dev jpeg-dev libjpeg"
 
 RUN apk add --no-cache ${BUILD_DEPS} \
     && python -m venv .venv \
-    && .venv/bin/pip install --no-cache-dir -U pip setuptools
+    && .venv/bin/pip install --no-cache-dir -U pip setuptools wheel
 
 COPY requirements.txt .
 
@@ -18,7 +18,7 @@ RUN .venv/bin/pip install --no-cache-dir -r requirements.txt \
         -exec rm -rf '{}' \+
 
 ### RUN STAGE ###
-FROM python:3.7-alpine
+FROM python:3.10-alpine
 
 WORKDIR /app
 
@@ -27,7 +27,7 @@ ENV PYTHONUNBUFFERED 1
 # No pyc file writing
 ENV PYTHONDONTWRITEBYTECODE 1
 
-ARG RUNTIME_DEPS="libpq libffi libressl"	
+ARG RUNTIME_DEPS="libpq libffi libressl gettext icu-data-full zlib libjpeg"
 RUN apk add --no-cache ${RUNTIME_DEPS}
 
 COPY --from=builder /app /app
@@ -37,5 +37,7 @@ COPY manage.py .
 # Make venv bins accessible.
 ENV PATH="/app/.venv/bin:$PATH"
 
-CMD ["gunicorn", "jiaoge.wsgi:application", "--bind", "0.0.0.0:8000", "--access-logfile", "-"]
+EXPOSE 8080
+
+CMD ["gunicorn", "jiaoge.wsgi:application", "--bind", ":8080", "--workers", "2",  "--access-logfile", "-"]
 

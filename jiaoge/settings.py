@@ -128,7 +128,7 @@ DATABASES = {
     "default": env.db(),
 }
 
-ALLOWED_HOSTS = [env("HEROKU_DOMAIN", default=None)]
+ALLOWED_HOSTS = [env("EXTERNAL_DOMAIN", default=None)]
 
 # Static file config.
 AWS_DEFAULT_ACL = None
