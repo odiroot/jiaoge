@@ -3,6 +3,7 @@ boto3~=1.23.8
 Django~=3.2
 gunicorn
 pytz
+tzdata
 
 # Django addons
 django-countries~=7.3
