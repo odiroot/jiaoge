@@ -31,8 +31,7 @@ ARG RUNTIME_DEPS="libpq libffi libressl gettext icu-data-full zlib libjpeg"
 RUN apk add --no-cache ${RUNTIME_DEPS}
 
 COPY --from=builder /app /app
-COPY jiaoge jiaoge
-COPY manage.py .
+COPY . /app
 
 # Make venv bins accessible.
 ENV PATH="/app/.venv/bin:$PATH"
