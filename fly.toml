@@ -1,7 +1,7 @@
 app = "jiaoge"
 
 [deploy]
-  release_command = "python manage.py migrate && python manage.py compilemessages -l pl -l de"
+  release_command = "sh release.sh"
   strategy = "immediate"
 
 [env]
