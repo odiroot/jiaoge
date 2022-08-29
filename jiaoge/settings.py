@@ -143,4 +143,8 @@ AWS_S3_OBJECT_PARAMETERS = {
 STATIC_URL = "https://%s.s3.amazonaws.com/static/" % AWS_STORAGE_BUCKET_NAME
 
 SENTRY_DSN = env("SENTRY_DSN", default=None)
-sentry_sdk.init(dsn=SENTRY_DSN, integrations=[DjangoIntegration()])
+sentry_sdk.init(
+    dsn=SENTRY_DSN,
+    integrations=[DjangoIntegration()],
+    traces_sample_rate=1.0,
+)
