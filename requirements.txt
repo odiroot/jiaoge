@@ -17,7 +17,7 @@ django-timezone-field~=5.0
 psycopg2-binary~=2.9.4
 
 # Additional libs.
-Pillow~=9.3.0  # For ImageField.
+Pillow~=9.4.0  # For ImageField.
 markdown~=3.4.1  # For DRF.
 
 # Non-lib tools.
