@@ -1,29 +1,32 @@
 app = "jiaoge"
 
 [deploy]
-  release_command = "sh release.sh"
-  strategy = "immediate"
+    release_command = "sh release.sh"
+    strategy = "immediate"
 
 [env]
     AWS_STORAGE_BUCKET_NAME = "jiaoge"
-    DEBUG = 0
-    DISABLE_COLLECTSTATIC = 1
+    DEBUG = "0"
+    DISABLE_COLLECTSTATIC = "1"
     EXTERNAL_DOMAIN = "jiaoge.fly.dev"
+
+[processes]
+    app = "gunicorn jiaoge.wsgi:application"
 
 [[services]]
     internal_port = 8080
     protocol = "tcp"
 
     [[services.ports]]
-      handlers = ["http"]
-      port = "80"
-      force_https = true
+        handlers = ["http"]
+        port = 80
+        force_https = true
 
     [[services.ports]]
-      handlers = ["tls", "http"]
-      port = "443"
+        handlers = ["tls", "http"]
+        port = 443
 
     [[services.tcp_checks]]
-      grace_period = "3s"
-      interval = "30s"
-      timeout = "2s"
+        grace_period = "3s"
+        interval = "30s"
+        timeout = "2s"
