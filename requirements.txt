@@ -11,7 +11,7 @@ django-environ~=0.9.0
 django-hashid-field~=3.3.3
 djangorestframework~=3.14.0
 django-storages~=1.13
-django-timezone-field~=5.0
+django-timezone-field~=5.1
 
 # Database
 psycopg2-binary~=2.9.4
