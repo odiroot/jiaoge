@@ -18,7 +18,7 @@ psycopg2-binary~=2.9.4
 
 # Additional libs.
 Pillow~=9.4.0  # For ImageField.
-markdown~=3.4.1  # For DRF.
+markdown~=3.4.4  # For DRF.
 
 # Non-lib tools.
 sentry-sdk~=1.21.1
